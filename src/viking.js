@@ -56,17 +56,26 @@ class War {
     this.saxonArmy.push(saxon);
   }
   vikingAttack() {
+    //creating random viking warrior and saxon warrior
     let indexVikingRandom = Math.floor(Math.random() * this.vikingArmy.length);
     let indexSaxonRandom = Math.floor(Math.random() * this.saxonArmy.length);
 
+    //chosen the warriors
     let chosenViking = this.vikingArmy[indexVikingRandom];
     let chosenSaxon = this.saxonArmy[indexSaxonRandom];
 
-    let saxonDamage = chosenSaxon.receiveDamage(chosenViking.attack());
-    if (saxonDamage > chosenSaxon.health) {
-      let killed = this.vikingArmy.indexOf(chosenSaxon);
-      this.vikingArmy.splice(killed, 1);
+    //setting the chosenSaxon damage
+    let saxonDamageReceived = chosenSaxon.receiveDamage(chosenViking.attack());
+
+    //if deade, removing the chosenSaxon from the saxonArmy
+    if (saxonDamageReceived > chosenSaxon.health) {
+      //let killed = this.vikingArmy.indexOf(chosenSaxon);
+      //this.vikingArmy.splice(killed, 1);
+      this.vikingArmy.indexOf(chosenSaxon).splice(chosenSaxon, 1);
     }
+
+    //returning the damage received from the chosenSaxon at the battlefield
+    return saxonDamageReceived;
   }
   saxonAttack() {}
   showStatus() {}
